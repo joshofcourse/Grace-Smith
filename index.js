@@ -91,13 +91,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
         tl.set(lightbox, { display: "flex", onComplete: () => lightboxModal.scrollTop(0) });
         tl.to(".lightbox_about", { backgroundColor: "rgba(0, 0, 0, 0.75)", duration: 1 }, "<");
         tl.from(lightboxModal, { x: "-100%", duration: 1, ease: "power4.inOut" }, "<");
-        tl.to(".contents_core", { x: "15rem", duration: 1, ease: "power4.inOut" }, "<");
+        tl.to(".contents_core", { x: "15%", duration: 1, ease: "power4.inOut" }, "<");
         tl.to(".hero_heading-split", { width: "30vw", duration: 1, ease: "power4.inOut" }, "<");
+        tl.from(".about_close-wrapper",{ x: "5%", opacity: 0, duration: 0.75, ease: "power4.out", delay: 0.75,}, "<");
         return tl;
       }
     );
   
-    // Initialize the "Services" modal with its custom timeline
+    // Initialize the "Inquire" modal with its custom timeline
     adjaxModal(
       "[tr-ajaxmodal-element='lightbox-inquire']",
       "[tr-ajaxmodal-element='lightbox-close-inquire']",
@@ -112,27 +113,28 @@ window.addEventListener("DOMContentLoaded", (event) => {
         tl.from(lightboxModal, { y: "100%", duration: 1, ease: "power4.inOut" }, "<");
         tl.to(".contents_core", { y: "-15rem", duration: 1, ease: "power4.inOut" }, "<");
         tl.to(".hero_heading-split", { width: "30vw", y: "-4rem", duration: 1, ease: "power4.inOut" }, "<");
+        tl.from(".inquire_close-wrapper",{ y: "-20%", opacity: 0, duration: 0.75, ease: "power4.out", delay: 0.75,}, "<");
         return tl;
       }
     );
   
-    /*
-    // Initialize the "Contact" modal with its custom timeline
+    // Initialize the "Story" modal with its custom timeline
     adjaxModal(
-      "[tr-ajaxmodal-element='lightbox-contact']",
-      "[tr-ajaxmodal-element='lightbox-close-contact']",
-      "[tr-ajaxmodal-element='lightbox-modal-contact']",
-      "[tr-ajaxmodal-element='page-link-contact']",
-      "[tr-ajaxmodal-element='page-content-contact']",
+      "[tr-ajaxmodal-element='lightbox-story']",
+      "[tr-ajaxmodal-element='lightbox-close-story']",
+      "[tr-ajaxmodal-element='lightbox-modal-story']",
+      "[tr-ajaxmodal-element='page-link-story']",
+      "[tr-ajaxmodal-element='page-content-story']",
       (tl, lightbox, lightboxModal) => {
-        // Customize the timeline for "Contact" modal
+        // Customize the timeline for "Story" modal
         tl.set("body", { overflow: "hidden" });
-        tl.set(lightbox, { display: "block", onComplete: () => lightboxModal.scrollTop(0) });
-        tl.from(lightboxModal, { x: "-50%", duration: 1.5, ease: "elastic.out(1, 0.3)" }, "<");
-        tl.to(".contents_core", { x: "5rem", duration: 1, ease: "circ.out" }, "<");
-        tl.to(".hero_heading-split", { width: "30vw", duration: 1.2, ease: "sine.inOut" }, "<");
+        tl.set(lightbox, { display: "flex", onComplete: () => lightboxModal.scrollTop(0) });
+        tl.to(".lightbox_story", { backgroundColor: "rgba(0, 0, 0, 0.75)", duration: 1 }, "<");
+        tl.from(lightboxModal, { x: "100%", duration: 1, ease: "power4.inOut" }, "<");
+        tl.to(".contents_core", { x: "-15%", duration: 1, ease: "power4.inOut" }, "<");
+        tl.to(".hero_heading-split", { width: "30vw", duration: 1, ease: "power4.inOut" }, "<");
+        tl.from(".story_close-wrapper",{ x: "-5%", opacity: 0, duration: 0.75, ease: "power4.out", delay: 0.75,}, "<");
         return tl;
       }
     );
-    */
   });
