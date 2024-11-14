@@ -1,6 +1,5 @@
 // #region AJAX MODALS
 
-
 window.addEventListener("DOMContentLoaded", (event) => {
   // Parameterized ajaxmodal component with individual timelines
   function adjaxModal(lightboxSelector, lightboxCloseSelector, lightboxModalSelector, cmsLinkSelector, cmsPageContentSelector, setupTimeline) {
@@ -281,6 +280,8 @@ $(document).ready(function () {
 // ----------------------------------------------------------
 // #region Scroll Animations
 
+//---------------------------------------------------------------------------------------------------------
+// Above Mobile Execute
 $(document).ready(function () {
   // Define each function call only if screen is above 768px
   function aboveMobile() {
@@ -288,10 +289,9 @@ $(document).ready(function () {
       storyCloseImage();
       heroTitle();
       gsAbout();
-      letterFade();
-      storyParaDown();
-      storyParaUp();
       staggerFade();
+      storyParaUp();
+      footerPara();
   }
 
   // Set up a media query list for (min-width: 768px)
@@ -309,6 +309,39 @@ $(document).ready(function () {
           aboveMobile();
       }
   });
+});
+
+//---------------------------------------------------------------------------------------------------------
+// Above Tablet Execute
+
+$(document).ready(function () {
+  // Define each function call only if screen is above 768px
+  function aboveTablet() {
+      storyParaDown();
+  }
+
+  // Set up a media query list for (min-width: 768px)
+  const mediaQuery = window.matchMedia("(min-width: 992px)");
+
+  // Initial check to run functions if already above 768px on page load
+  if (mediaQuery.matches) {
+    aboveTablet();
+  }
+
+  // Listen for changes in viewport width to rerun functions if needed
+  mediaQuery.addEventListener("change", function (event) {
+      if (event.matches) {
+          // The screen width is above 768px
+          aboveTablet();
+      }
+  });
+});
+
+//---------------------------------------------------------------------------------------------------------
+// All sizes execute
+
+$(document).ready(function () {
+      letterFade();
 });
 
 // #region Testimonial Image Slides
@@ -427,6 +460,31 @@ function heroTitle() {
 
 // #endregion
 
+// #region Footer Parallax
+
+function footerPara() {
+  $(".page_contents").each(function (index) {
+    let page = $(this);
+    let footer = $(".footer");
+
+    let footerPara = gsap.timeline({
+      scrollTrigger: {
+        trigger: page,
+        start: "bottom bottom",
+        end: "bottom top",
+        scrub: 0 
+      },
+    });
+
+    footerPara.from($(footer), {
+      y: "-20svh"
+      
+    });
+  });
+}
+
+// #endregion
+
 // #region GS About Image
 
 function gsAbout() {
@@ -440,7 +498,7 @@ function gsAbout() {
       }
     });
     gsAbout.fromTo($(this), {
-      width: "50%"
+      width: "75%"
     }, {
       width: "100%"
     }
