@@ -222,11 +222,9 @@ $(document).ready(function () {
       end: "bottom 10%",
       onEnter: () => {
         $(".logo_bar").addClass("dark");
-        $(".navbar-inner .btn-blur").addClass("dark");
       },
       onEnterBack: () => {
         $(".logo_bar").addClass("dark");
-        $(".navbar-inner .btn-blur").addClass("dark");
       }
     });
   });
@@ -238,11 +236,9 @@ $(document).ready(function () {
       end: "bottom 10%",
       onEnter: () => {
         $(".logo_bar").removeClass("dark");
-        $(".navbar-inner .btn-blur").removeClass("dark");
       },
       onEnterBack: () => {
         $(".logo_bar").removeClass("dark");
-        $(".navbar-inner .btn-blur").removeClass("dark");
       }
     });
   });
@@ -251,8 +247,8 @@ $(document).ready(function () {
   $("[is-light='true']").each(function (index) {
     ScrollTrigger.create({
       trigger: $(this),
-      start: "top 90%%",
-      end: "bottom 90%%",
+      start: "top 90%",
+      end: "bottom 90%",
       onEnter: () => {
         $(".navbar-inner .btn-blur").addClass("dark");
       },
@@ -266,7 +262,7 @@ $(document).ready(function () {
     ScrollTrigger.create({
       trigger: $(this),
       start: "top 90%",
-      end: "bottom 90%%",
+      end: "bottom 90%",
       onEnter: () => {
         $(".navbar-inner .btn-blur").removeClass("dark");
       },
@@ -274,45 +270,16 @@ $(document).ready(function () {
         $(".navbar-inner .btn-blur").removeClass("dark");
       }
     });
-  });
+  }); 
 
   // #endregion
 // ----------------------------------------------------------
 // #region Scroll Animations
 
-//---------------------------------------------------------------------------------------------------------
-// Above Mobile Execute
-$(document).ready(function () {
-  // Define each function call only if screen is above 768px
-  function aboveMobile() {
-      wipeReveal();
-      storyCloseImage();
-      heroTitle();
-      gsAbout();
-      staggerFade();
-      storyParaUp();
-      footerPara();
-  }
 
-  // Set up a media query list for (min-width: 768px)
-  const mediaQuery = window.matchMedia("(min-width: 768px)");
-
-  // Initial check to run functions if already above 768px on page load
-  if (mediaQuery.matches) {
-    aboveMobile();
-  }
-
-  // Listen for changes in viewport width to rerun functions if needed
-  mediaQuery.addEventListener("change", function (event) {
-      if (event.matches) {
-          // The screen width is above 768px
-          aboveMobile();
-      }
-  });
-});
 
 //---------------------------------------------------------------------------------------------------------
-// Above Tablet Execute
+// Desktop Only
 
 $(document).ready(function () {
   // Define each function call only if screen is above 768px
@@ -338,10 +305,62 @@ $(document).ready(function () {
 });
 
 //---------------------------------------------------------------------------------------------------------
-// All sizes execute
+// Mobile Only
 
 $(document).ready(function () {
+  // Define each function call only if screen is above 768px
+  function mobileOnly() {
+      heroTitleMobile()
+  }
+
+  const mediaQuery = window.matchMedia("(max-width: 479px)");
+
+  if (mediaQuery.matches) {
+    mobileOnly();
+  }
+
+  mediaQuery.addEventListener("change", function (event) {
+      if (event.matches) {
+          mobileOnly();
+      }
+  });
+});
+
+//---------------------------------------------------------------------------------------------------------
+// Desktop & Tablet & Mobile
+$(document).ready(function () {
       letterFade();
+      staggerFade();
+});
+
+//---------------------------------------------------------------------------------------------------------
+// Desktop & Tablet
+$(document).ready(function () {
+  // Define each function call only if screen is above 768px
+  function aboveMobile() {
+      wipeReveal();
+      storyCloseImage();
+      heroTitle();
+      gsAbout();
+      storyParaUp();
+      footerPara();
+  }
+
+  // Set up a media query list for (min-width: 768px)
+  const mediaQuery = window.matchMedia("(min-width: 768px)");
+
+  // Initial check to run functions if already above 768px on page load
+  if (mediaQuery.matches) {
+    aboveMobile();
+  }
+
+  // Listen for changes in viewport width to rerun functions if needed
+  mediaQuery.addEventListener("change", function (event) {
+      if (event.matches) {
+          // The screen width is above 768px
+          aboveMobile();
+      }
+  });
 });
 
 // #region Testimonial Image Slides
@@ -419,6 +438,7 @@ function storyCloseImage() {
 
 // #region Hero GS Para
 
+// Desktop
 function heroTitle() {
   $(".hero_section").each(function (index) {
     let heroTitleOuter = $(this);
@@ -431,7 +451,7 @@ function heroTitle() {
         trigger: heroTitleOuter,
         start: "top top",
         end: "bottom top",
-        scrub: 0,
+        scrub: 0.5,
       },
     });
     heroTitle.fromTo(
@@ -441,7 +461,7 @@ function heroTitle() {
     );
     heroTitle.to(
       $(this).find(heroContent),
-      { y: "50vh", opacity: 0, filter: "blur(2px)" },
+      { y: "50%", opacity: 0, filter: "blur(2px)" },
       "<",
     );
     heroTitle.fromTo($(logoBar),
@@ -452,6 +472,40 @@ function heroTitle() {
       }, {
         opacity: 1,
         width: "100%",
+        filter: "blur(0px)" 
+      }
+    );
+  });
+}
+
+// Mobile
+function heroTitleMobile() {
+  $(".hero_section").each(function (index) {
+    let heroTitleOuter = $(this);
+    let heroTitleInner = $(".hero_heading-split");
+    let heroContent = $(".hero_content");
+    let logoBar = $(".logo_bar");
+
+    let heroTitle = gsap.timeline({
+      scrollTrigger: {
+        trigger: heroTitleOuter,
+        start: "top top",
+        end: "bottom top",
+        scrub: 0.5,
+      },
+    });
+  
+    heroTitle.to(
+      $(this).find(heroContent),
+      { y: "30vh", opacity: 0, filter: "blur(2px)" },
+      "<",
+    );
+    heroTitle.fromTo($(logoBar),
+      { 
+        opacity: 0,
+        filter: "blur(3px)" 
+      }, {
+        opacity: 1,
         filter: "blur(0px)" 
       }
     );
@@ -518,8 +572,6 @@ let splitType = new SplitType("[text-split]", {
   tagName: "span"
 });
 
-let totalDuration = 5;
-
 $("[letter-fade]").each(function (index) {
   let childLetters = $(this).find(".char");
   let tl = gsap.timeline({
@@ -528,11 +580,23 @@ $("[letter-fade]").each(function (index) {
       start: "top bottom",
       end: "top 90%",
       toggleActions: "none play none reset"
-    },
-    defaults: {
-      ease: "power4.out"
     }
   });
+  // Staggered letter fade
+  tl.from($(this).find(".char"), {
+    opacity: 0,
+    duration: 1,
+    y: "100%",
+    stagger: {amount: 0.5,}
+  });
+  tl.from($(this), { 
+    filter: "blur(4px)",
+    scale: 1.1, 
+    duration: 1.5 
+  }, 0);
+
+  // Random letters fade
+  /*
   childLetters.each(function (index) {
     let randomDuration = gsap.utils.random(4, totalDuration);
     let maxDelay = totalDuration - randomDuration;
@@ -540,6 +604,8 @@ $("[letter-fade]").each(function (index) {
     tl.from($(this), { opacity: 0, duration: randomDuration }, randomDelay);
   });
   tl.from($(this), { scale: 1.1, ease: "power4.out", filter: "blur(4px)", duration: totalDuration }, 0);
+  */
+
 });
 }
 
