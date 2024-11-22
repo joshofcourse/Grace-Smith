@@ -1,5 +1,5 @@
 // #region AJAX MODALS
-
+/*
 window.addEventListener("DOMContentLoaded", (event) => {
   // Parameterized ajaxmodal component with individual timelines
   function adjaxModal(lightboxSelector, lightboxCloseSelector, lightboxModalSelector, cmsLinkSelector, cmsPageContentSelector, setupTimeline) {
@@ -172,6 +172,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
       }
   );
 });
+
+*/
 
 // #endregion
 // ----------------------------------------------------------
